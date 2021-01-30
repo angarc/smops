@@ -1,0 +1,25 @@
+.LoginScreen {
+    width: 100%;
+    height: 100vh;
+    background-color: #eee;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.LoginScreen__card-title {
+    font-weight: 700;
+    font-size: 70px;
+}
+
+.LoginScreen__card {
+    text-align: center;
+    width: 50%;
+}
+
+.LoginScreen__card-form {
+    text-align: left;
+}

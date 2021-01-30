@@ -23,8 +23,12 @@ module.exports = {
                 use: [{
                     loader: "less-loader" // compiles Less to CSS
                 }]
+            },
+            {
+                test: /\.scss$/i,
+                use: ['node-sass']
             }
         ]
     },
     devtool: 'cheap-module-source-map'
-}   
+}
