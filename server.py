@@ -1,10 +1,12 @@
 from flask import Flask, render_template, request
+from twilio.twiml.messaging_response import MessagingResponse
+
 import commander
 import time
 import json
 app = Flask(__name__)
 commands = []
-
+messages={}
 
 @app.route('/')
 def index():
@@ -47,11 +49,21 @@ def testCommand():
             commands.append(request.args.get("command")[1:-1])
             return "200"
 
+#HIGHLY INSECURE, WE NEED TO MAKE SURE THAT THIS IS SUBSTITUTED FOR A DATABASE
 @app.route('/get-data',methods=["POST","GET"])
 def getData():
-    oldCommands = list(commands)
-    commands.clear()
-    return json.dumps({"commands":oldCommands})
+    oldMessages = dict(messages)
+    messages.clear()
+    return json.dumps({"messages":oldMessages})
+
+#HIGLHY INSECURE, WE NEED TO MAKE SURE THAT ONLY TWILIO CAN REACH US HERE
+@app.route("/receive-sms", methods=['POST'])
+def sms_reply():
+    #print(request.form.to_dict())
+    data = {"From":request.form['From'],"To":request.form['To'],"Body":request.form['Body'],"AccountSid":request.form["AccountSid"]}
+    messageId = request.form["MessageSid"]
+    messages[messageId] = data
+    return "200"
 
 if __name__ == '__main__':
     app.run()
