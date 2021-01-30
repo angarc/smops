@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request
-
+import commander
+import time
 app = Flask(__name__)
+commands = []
+
 
 @app.route('/')
 def index():
@@ -30,6 +33,15 @@ def modifyUserData():
 @app.route('/get-machine-info',methods=["POST","GET"])
 def getMachineInfo():
     return """{name:"nice machine"}"""
+
+@app.route('/test-command',methods=["POST","GET"])
+def testCommand():
+        if request.method == 'POST':
+            return "None"
+        elif request.method == "GET":
+            myCommander = commander.Commander()
+            myCommander.runCommand(request.args.get("command")[1:-1])
+            return myCommander.readCommand()
 
 if __name__ == '__main__':
     app.run()

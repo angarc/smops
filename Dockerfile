@@ -9,19 +9,17 @@ WORKDIR /app
 
 #Basic installs
 RUN apt-get update \
-    && apt-get install -y python3-pip\
-    && pip3 install virtualenv
+    && apt-get install -y python3-pip
 
 
 COPY requirements.txt .
 
 RUN set -x \
-    # Create virtualenv
-    && virtualenv -p python3 venv \
-    # Install Python libs
-    && . venv/bin/activate \
-    && pip install --upgrade -r requirements.txt
+    && pip3 install --upgrade -r requirements.txt
 COPY . .
+RUN set -x \
+    # Set permissions
+    && chmod +x entrypoint.sh
 
 EXPOSE 5000
-CMD ["flask","run","--host=0.0.0.0"]
+CMD ["./entrypoint.sh"]
