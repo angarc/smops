@@ -1,7 +1,6 @@
 import os
-from flask import Flask
+from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
-
 
 app = Flask(__name__)
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -18,7 +17,7 @@ else:
 '''
 SQLite3
 '''
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://saijal:saijal@localhost/flaskreact'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://garcia:@localhost/smops'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
