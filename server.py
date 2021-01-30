@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import commander
 import time
+import json
 app = Flask(__name__)
 commands = []
 
@@ -38,10 +39,19 @@ def getMachineInfo():
 def testCommand():
         if request.method == 'POST':
             return "None"
-        elif request.method == "GET":
+        elif False:
             myCommander = commander.Commander()
             myCommander.runCommand(request.args.get("command")[1:-1])
             return myCommander.readCommand()
+        elif request.method == "GET":
+            commands.append(request.args.get("command")[1:-1])
+            return "200"
+
+@app.route('/get-data',methods=["POST","GET"])
+def getData():
+    oldCommands = list(commands)
+    commands.clear()
+    return json.dumps({"commands":oldCommands})
 
 if __name__ == '__main__':
     app.run()
