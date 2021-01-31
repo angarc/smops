@@ -16,7 +16,7 @@ and get started sending terminal commands on the go!
 
 
 ## How its Built
-[Image of Technologies](file:///Users/theodoremcnulty/Desktop/Screen%20Shot%202021-01-31%20at%2010.35.19%20AM.png)
+[Image of Technologies](https://i.ibb.co/hgWz2T9/Screen-Shot-2021-01-31-at-10-35-19-AM.png)
 
 SMOPS has a React frontend paired with a Flask backend, and uses postgreSQL to store the user's credentials. 
 We pair-programmed for most of the hackathon, pooling together our knowledge across the stack to build the final application
