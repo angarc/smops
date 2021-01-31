@@ -7,7 +7,7 @@ import axios from 'axios';
 class loginScreen extends React.Component {
     constructor(props)  {
         super(props)
-        this.state = {email: "", password: "", phone_number: "", authentication_sid:  "", token: "", loggedIn: false}
+        this.state = {email: "", password: "", phone_number: "", authentication_sid:  "", token: "", loggedIn: false, registered: false}
     }
 
     submit() {
@@ -40,6 +40,7 @@ class loginScreen extends React.Component {
           .catch(function (error) {
             console.log(error);
           });
+        this.setState({registered: true})
         console.log(result)
 
     }
@@ -50,6 +51,17 @@ class loginScreen extends React.Component {
                 {this.state.loggedIn ?
                <Container className={"MainScreen"}>
                <Row>
+                   {this.state.registered ?
+                    <Col xs={12}>
+                        <h1 className={"MainScreen__title"}>
+                           Congrats!
+                       </h1> 
+                       <h2>
+                           You successfully registered. You can now text the number below with any commands-- all on the go! Happy system administrating :) <br />
+                           Phone Number: +1 (770) 212-3582
+                       </h2>
+                    </Col>
+                       :
                    <Col xs={12}>
                        <h1 className={"MainScreen__title"}>
                            Enter in your Twillio information so that we can connect with you on the go!
@@ -73,6 +85,7 @@ class loginScreen extends React.Component {
                            <button className="btn btn-primary btn-block" onClick={() => this.submitRegister()}> Register </button>
                        </Form>
                    </Col>
+                   }
                </Row>
             </Container>
                 
