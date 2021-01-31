@@ -17,6 +17,7 @@
     "github": "https://github.com/shakyasaijal"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "concurrently": "^5.2.0",
     "node-sass": "^5.0.0",

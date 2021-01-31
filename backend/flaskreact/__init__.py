@@ -17,7 +17,7 @@ else:
 '''
 SQLite3
 '''
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://garcia:@localhost/smops'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://shrutiverma:@localhost/smops'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
