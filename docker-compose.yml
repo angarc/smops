@@ -1,0 +1,29 @@
+version: "2.1"
+services:
+  postgres:
+    image: "postgres:11.5-alpine"
+    environment:
+      POSTGRES_USER: "user"
+      POSTGRES_PASSWORD: "password"
+      POSTGRES_DB: "smops_dev"
+    ports:
+      - "5432:5432"
+    volumes:
+      #- /usr/local/var/postgres/data:/var/lib/postgresql/data
+      - ./tmp/db:/var/lib/postgresql/data
+
+
+  app:
+    build: .
+    depends_on:
+      - postgres
+    ports:
+      - "5000:5000"
+    volumes:
+      - ".:/app"
+    shm_size: 512M 
+    stdin_open: true
+    tty: true
+    env_file:
+      - '.env.docker'
+      
