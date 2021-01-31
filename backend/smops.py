@@ -12,8 +12,8 @@ from twilio.rest import Client
 
 # Your Account Sid and Auth Token from twilio.com/console
 # and set the environment variables. See http://twil.io/secure
-account_sid = 'TWILIO_ACCOUNT_SID'
-auth_token = 'TWILIO_AUTH_TOKEN'
+account_sid = os.environ.get('TWILIO_ACCOUNT_SID')
+auth_token = os.environ.get('TWILIO_AUTH_TOKEN')
 client = Client(account_sid, auth_token)
 
 
@@ -23,7 +23,7 @@ def sendUserSMS(sender,receiver,message,client):
     #print("To: " + receiver)
     #print("Message: ")
     #print(message)
-    if False:
+    if True:
         message = client.messages \
         .create(
             body=message,
@@ -35,16 +35,18 @@ def printCommands():
     for processID,process in processes.items():
         print(process["outputLines"])
 
+print("Beggining")
 while True:
     try:
         #Checks if any new sms came through
         getDataRequest = requests.get("""http://localhost:5000/get-data""")
 
         newMessages = getDataRequest.json()["messages"]
-        if len(newMessages) > 0:
+        if (len(newMessages) > 0) or True:
             print(newMessages)
+            pass
         for messageId,message in newMessages.items(): #Adds the new commands and begins running them
-            print(message)
+            #print(message)
             commandParts = list(bashlex.split(message['Body']))
             process = subprocess.Popen(commandParts,
                         stdout=subprocess.PIPE, 
